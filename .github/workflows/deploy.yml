@@ -1,0 +1,19 @@
+name: CI Pipeline
+on: push
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Get Checkout
+          uses: actions/checkout@v4
+        - name: Run composite Action
+          id: build-step
+          uses: ./.github/actions/non-build
+          with:
+            node-version: 18
+
+        - name: Print Result
+          run: echo "Build  Result = ${{steps.build-step.outputs.build-status  }}"
+        
