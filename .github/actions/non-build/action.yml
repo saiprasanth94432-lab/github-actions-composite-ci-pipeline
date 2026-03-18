@@ -11,7 +11,7 @@ inputs:
 outputs:
   build-status:
    description: "Build Result"
-   value: ${{steps.build.outputs.status}}
+   value: ${{steps.success_step.outputs.status}}
 runs:
   using: composite
   steps:
@@ -38,13 +38,13 @@ runs:
     
     - name: Set Success Output
       if: success()
-      id: build
+      id: success_step
       run: echo "status=success" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Set Failure Output 
       if: failure()
-      id: build
+      id: failure_step
       run: echo "status=failure" >> $GITHUB_OUTPUT
       shell: bash
   
